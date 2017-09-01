@@ -31,71 +31,8 @@
         </div>
         <hr />
 
-        <!--Score-->
-        <div class="row">
-            <div class="col-md-4 col-md-push-1 panel panel-success text-center">
-                <div class="panel-heading">Game Stats</div>
-                <div class="panel-body">
-                    <span id="scoretitle"><strong>Score:</strong></span>&nbsp;<span id="score"></span>
-                    <p id="gamestatus"></p>
-                    <button id="startbutton" class="btn btn-success">Start New Game</button>
-                </div>
-            </div>
-            <div class="col-md-4 col-md-push-3 panel panel-warning text-center">
-                <div class="panel-heading">Highcore</div>
-                <div class="panel-body">
-                    <div class="row"><span><strong>Current Highscore:&nbsp;</strong></span><span id="highscore"></span></div>
-                    <p class="text-muted">This score is for this session only and will not be saved.</p>
-                </div>
-            </div>
-        </div>
-
-        <!--Start game button-->
-        <!--<div class="row text-center" style="visibility: visible;">
-            <div class="well col-md-8 col-md-push-2">
-                <p id="gamestatus">This is some test status text.</p>
-                <button id="startbutton" class="btn btn-success">Start New Game</button>
-            </div>
-        </div>-->
-
-        <!--Actual game content-->
-        <div id="gamecontainer" class="row" style="visibility:hidden;">
-            <div class="panel panel-default">
-                <div class="panel-body text-center">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <img id="computerpickimg" src="#" class="img-thumbnail gameimage" />
-                        </div>
-                        <div class="col-md-4 col-md-push-4">
-                            <div class="col-md-6">
-                                <span><strong>Object:&nbsp;</strong><span id="computerpickobject"></span></span>
-                            </div>
-                            <div class="col-md-6">
-                                <span><strong>Condition:&nbsp;</strong><span id="computerpickcondition"></span></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <hr />
-                        <button id="buttonrock" class="btn btn-lg btn-primary" onclick="MakeChoice('Rock')">Rock</button>
-                        <button id="buttonpaper" class="btn btn-lg btn-primary" onclick="MakeChoice('Paper')">Paper</button>
-                        <button id="buttonscissors" class="btn btn-lg btn-primary" onclick="MakeChoice('Scissors')">Scissors</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--Debug Value Printint-->
-        <div class="row">
-            <h5><u>DEBUG VALUES</u></h5>
-            <p id="debugchoice"></p>
-            <p id="debuguserchoice"></p>
-            <p id="debugresult"></p>
-            <p id="debugtimer"></p>
-        </div>
-
         <!--How to play-->
-        <div class="row text-center">
+        <div id="#HowToPlay" class="row text-center">
             <div class="panel panel-primary">
                 <div class="panel-heading">How to Play</div>
                 <div class="panel-body">
@@ -113,8 +50,103 @@
                         </ul>
                     </div>
                 </div>
-                <div class="panel-footer">You will start with some points. If you lose all of your points or if the timer runs out, the game will end.</div>
+                <div class="panel-footer">You will start with 20 points. If you lose all of your points or if the timer runs out, the game will end.</div>
             </div>
+        </div>
+
+        <!--Start game button-->
+        <div class="row">
+            <div class="col-md-4 col-md-push-1 text-center">
+                <div class="panel panel-success">
+                    <div class="panel-heading">Game</div>
+                    <div class="panel-body">
+                        
+                        <!--<span id="scoretitle"><strong>Score:</strong></span>&nbsp;<span id="score"></span>-->
+                        
+                        <button id="startbutton" class="btn btn-success">Start New Game</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-push-3 text-center">
+                <div class="panel panel-info">
+                    <div class="panel-heading">Highcore</div>
+                    <div class="panel-body">
+                        <dl>
+                            <dt>Highscore: </dt>
+                            <dd id="highscore"></dd>
+                        </dl>
+                        <!--<span><strong>Current Highscore:&nbsp;</strong></span><span id="highscore"></span>-->
+                    </div>
+                    <div class="panel-footer">This score is for this session only and will not be saved.</div>
+                </div>
+            </div>
+        </div>
+
+        <!--Actual game content-->
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body text-center">
+                    <div class="row">
+                        <div id="gamecontainer" class="col-md-12" style="visibility:hidden;">
+
+                            <!--Score-->
+                            <div class="col-md-3">
+                                <dl>
+                                    <dt>Score: </dt>
+                                    <dd id="score"></dd>
+                                </dl>
+                            </div>
+
+                            <!--Image-->
+                            <div class="col-md-6">
+                                <img id="computerpickimg" src="#" class="img-thumbnail gameimage" />
+                            </div>
+
+                            <!--Timer-->
+                            <div class="col-md-3">
+                                <dl>
+                                    <dt>Timer</dt>
+                                    <dd id="timer"></dd>
+                                </dl>
+                            </div>
+                        </div>
+
+                        <!--Game conditions-->
+                        <div class="col-md-6 col-md-push-3">
+                            <div class="col-md-6">
+                                <dl>
+                                    <dt>Object:</dt>
+                                    <dd id="computerpickobject"></dd>
+                                </dl>
+                            </div>
+                            <div class="col-md-6">
+                                <dl>
+                                    <dt>Condition to Match: </dt>
+                                    <dd id="computerpickcondition"></dd>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span id="gamestatus"></span>
+                    </div>
+                    <div class="row">
+                        <hr />
+                        <button id="buttonrock" class="btn btn-lg btn-primary gamebutton" onclick="MakeChoice('Rock')" disabled>Rock</button>
+                        <button id="buttonpaper" class="btn btn-lg btn-primary" onclick="MakeChoice('Paper')" disabled>Paper</button>
+                        <button id="buttonscissors" class="btn btn-lg btn-primary" onclick="MakeChoice('Scissors')" disabled>Scissors</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--Debug Value Printint-->
+        <div class="row">
+            <h5><u>DEBUG VALUES</u></h5>
+            <p id="debugchoice"></p>
+            <p id="debuguserchoice"></p>
+            <p id="debugresult"></p>
+            <p id="debugtimer"></p>
         </div>
 
         <!-- End custom body content -->
@@ -128,9 +160,21 @@
     <script type="text/javascript">
         //Game elements setup
         var gameContainer = document.getElementById("gamecontainer");
+        var gameButtons = document.getElementsByClassName("gamebutton");
         var gameStartButton = document.getElementById("startbutton").onclick = function () {
-            this.style.visibility = "hidden";
+            //Hide the Start Game button
+            //this.style.visibility = "hidden";
+
+            //Enable the game buttons
+            document.getElementById("buttonrock").disabled = false;
+            document.getElementById("buttonpaper").disabled = false;
+            document.getElementById("buttonscissors").disabled = false;
+
+            //Show the main game pieces
             gamecontainer.style.visibility = "visible";
+
+            //Move the user's client to the game container and start.
+            gameContainer.scrollIntoView();
             StartGame();
             //StartTimer();
         }
@@ -138,10 +182,14 @@
         //Game actions
         //var gameChoices = ['Rock', 'Paper', 'Scissors'];
         var gameConditions = ['Win', 'Lose', 'Tie'];
+        //Choices
+        //  Choice is the object's name. This also works for the "Tie" condition.
+        //  Win is what needs to be picked to win against this item.
+        //  Lose is what needs to be picked to Lose against this item.
         var gameChoices = [
-            { choice: 'Rock', win: 'Scissors', lose: 'Paper', img: '/images/Assignment1/rock.jpg' },
-            { choice: 'Paper', win: 'Rock', lose: 'Scissors', img: '/images/Assignment1/paper.jpg' },
-            { choice: 'Scissors', win: 'Paper', lose: 'Rock', img: '/images/Assignment1/scissors.jpg' }
+            { choice: 'Rock', win: 'Paper', lose: 'Scissors', img: '/images/Assignment1/rock.jpg' },
+            { choice: 'Paper', win: 'Scissors', lose: 'Rock', img: '/images/Assignment1/paper.jpg' },
+            { choice: 'Scissors', win: 'Rock', lose: 'Paper', img: '/images/Assignment1/scissors.jpg' }
         ];
 
         //Game default values
