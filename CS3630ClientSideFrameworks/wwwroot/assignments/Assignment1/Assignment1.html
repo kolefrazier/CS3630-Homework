@@ -203,9 +203,9 @@
         //  Win is what needs to be picked to win against this item.
         //  Lose is what needs to be picked to Lose against this item.
         var gameChoices = [
-            { choice: 'Rock', win: 'Paper', lose: 'Scissors', img: '/images/rock.jpg' },
-            { choice: 'Paper', win: 'Scissors', lose: 'Rock', img: '/images/paper.jpg' },
-            { choice: 'Scissors', win: 'Rock', lose: 'Paper', img: '/images/scissors.jpg' }
+            { choice: 'Rock', win: 'Paper', lose: 'Scissors', img: 'images/rock.jpg' },
+            { choice: 'Paper', win: 'Scissors', lose: 'Rock', img: 'images/paper.jpg' },
+            { choice: 'Scissors', win: 'Rock', lose: 'Paper', img: 'images/scissors.jpg' }
         ];
 
         //Game default values
@@ -250,7 +250,7 @@
             document.getElementById("computerpickobject").textContent = "";
 
             //  Object image
-            document.getElementById("computerpickimg").src = "/images/smileyface.jpg";
+            document.getElementById("computerpickimg").src = "images/smileyface.jpg";
 
             //  Condition name
             document.getElementById("computerpickcondition").textContent = "";
