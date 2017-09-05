@@ -6,7 +6,7 @@
     <title>Assignment 1 - CS3630</title>
 
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/css/Assignment1/Assignment1.css"/>
+    <link rel="stylesheet" href="/css/Assignment1.css"/>
 </head>
 <body>
     <div class="container body-content">
@@ -203,9 +203,9 @@
         //  Win is what needs to be picked to win against this item.
         //  Lose is what needs to be picked to Lose against this item.
         var gameChoices = [
-            { choice: 'Rock', win: 'Paper', lose: 'Scissors', img: '/images/Assignment1/rock.jpg' },
-            { choice: 'Paper', win: 'Scissors', lose: 'Rock', img: '/images/Assignment1/paper.jpg' },
-            { choice: 'Scissors', win: 'Rock', lose: 'Paper', img: '/images/Assignment1/scissors.jpg' }
+            { choice: 'Rock', win: 'Paper', lose: 'Scissors', img: '/images/rock.jpg' },
+            { choice: 'Paper', win: 'Scissors', lose: 'Rock', img: '/images/paper.jpg' },
+            { choice: 'Scissors', win: 'Rock', lose: 'Paper', img: '/images/scissors.jpg' }
         ];
 
         //Game default values
@@ -250,7 +250,7 @@
             document.getElementById("computerpickobject").textContent = "";
 
             //  Object image
-            document.getElementById("computerpickimg").src = "/images/Assignment1/smileyface.jpg";
+            document.getElementById("computerpickimg").src = "/images/smileyface.jpg";
 
             //  Condition name
             document.getElementById("computerpickcondition").textContent = "";
@@ -388,7 +388,7 @@
                 highScore = gamePlayerScore;
                 document.getElementById("newhighscore").style.visibility = "visible";
             } else {
-                //This allows the "new high score!" message's visibility to update.'
+                //This allows the "new high score!" message's visibility to update.
                 document.getElementById("newhighscore").style.visibility = "hidden";
             }
         }
@@ -405,8 +405,7 @@
             if (currentGameTimer == -1) {
                 gameTimer.innerText = 0;
             } else {
-                //Debug log. Won't print if timerRun is false to prevent spam.
-                //Also, really bad use of an else.
+                //Debug log. Stuck in an else so that non-default (!= -1) timer values won't spam up the console.
                 console.log("Timer value: " + currentGameTimer + " -- timerRun value: " + timerRun);
             }
 
@@ -416,7 +415,6 @@
 
                 if (currentGameTimer <= 0) {
                     console.log("Timer has hit zero.");
-                    //alert("You have run out of time!");
                     EndGame();
                 }
             } 
