@@ -49,13 +49,19 @@
                             <li>Paper beats Rock</li>
                         </ul>
                     </div>
+                    <div class="col-md-12 text-center">
+                        <hr />
+                        <b>Examples</b><br />
+                        <p>Given Object is Paper, given Condition is Win. You need to pick the item that makes you win against Paper, which is scissors!</p>
+                        <p>Given Object is Rock, given Condition is Lose. You need to pick the item that makes you lose against Rock, which is scissors!</p>
+                    </div>
                 </div>
                 <div class="panel-footer">You will start with 20 points. If you lose all of your points or if the timer runs out, the game will end.</div>
             </div>
         </div>
 
-        <!--Start game button-->
         <div class="row">
+            <!--Start game button-->
             <div class="col-md-4 col-md-push-1 text-center">
                 <div class="panel panel-success">
                     <div class="panel-heading">Game</div>
@@ -67,17 +73,20 @@
                     </div>
                 </div>
             </div>
+
+            <!--Highscore Container-->
             <div class="col-md-4 col-md-push-3 text-center">
                 <div class="panel panel-info">
-                    <div class="panel-heading">Highcore</div>
-                    <div class="panel-body">
-                        <dl>
+                    <div class="panel-heading">Your Highcore</div>
+                    <div class="panel-body text-center">
+                        <div class="highscoretext"><span id="highscorepoints">30</span> points</div>
+                        <!--<dl>
                             <dt>Highscore: </dt>
                             <dd id="highscore"></dd>
-                        </dl>
+                        </dl>-->
                         <!--<span><strong>Current Highscore:&nbsp;</strong></span><span id="highscore"></span>-->
                     </div>
-                    <div class="panel-footer">This score is for this session only and will not be saved.</div>
+                    <!--<div class="panel-footer">This score is for this session only and will not be saved.</div>-->
                 </div>
             </div>
         </div>
@@ -93,8 +102,9 @@
                             <div class="col-md-3">
                                 <dl>
                                     <dt>Score: </dt>
-                                    <dd id="score"></dd>
+                                    <dd id="score">30</dd>
                                 </dl>
+                                <div id="newhighscore" style="visibility: hidden;"><p>New high score!</p></div>
                             </div>
 
                             <!--Image-->
@@ -106,7 +116,7 @@
                             <div class="col-md-3">
                                 <dl>
                                     <dt>Timer</dt>
-                                    <dd id="timer"></dd>
+                                    <dd><span id="timer"></span> seconds</dd>
                                 </dl>
                             </div>
                         </div>
@@ -127,9 +137,13 @@
                             </div>
                         </div>
                     </div>
+
+                    <!--Game status/Player feedback-->
                     <div class="row">
                         <span id="gamestatus"></span>
                     </div>
+
+                    <!--Player options-->
                     <div class="row">
                         <hr />
                         <button id="buttonrock" class="btn btn-lg btn-primary gamebutton" onclick="MakeChoice('Rock')" disabled>Rock</button>
@@ -141,7 +155,7 @@
         </div>
 
         <!--Debug Value Printint-->
-        <div class="row">
+        <div class="row" style="visibility: hidden;">
             <h5><u>DEBUG VALUES</u></h5>
             <p id="debugchoice"></p>
             <p id="debuguserchoice"></p>
@@ -161,6 +175,8 @@
         //Game elements setup
         var gameContainer = document.getElementById("gamecontainer");
         var gameButtons = document.getElementsByClassName("gamebutton");
+        var gameStatus = document.getElementById("gamestatus");
+        var gameTimer = document.getElementById("timer");
         var gameStartButton = document.getElementById("startbutton").onclick = function () {
             //Hide the Start Game button
             //this.style.visibility = "hidden";
@@ -176,12 +192,12 @@
             //Move the user's client to the game container and start.
             gameContainer.scrollIntoView();
             StartGame();
-            //StartTimer();
+            StartTimer();
         }
 
         //Game actions
-        //var gameChoices = ['Rock', 'Paper', 'Scissors'];
         var gameConditions = ['Win', 'Lose', 'Tie'];
+
         //Choices
         //  Choice is the object's name. This also works for the "Tie" condition.
         //  Win is what needs to be picked to win against this item.
@@ -194,8 +210,12 @@
 
         //Game default values
         var defaultGameScore = 20;
-        var defaultGameTimer = 5;
-        var highScore = 0;
+        var defaultGameTimer = 6; //Due to how the timer works and displays, this (six) is correct.
+        var highScore = 30; //Arbitrary value above the player's starting points value.
+
+        //Timer helpers
+        var currentGameTimer = -1;
+        var timerRun = false;
 
         //Game helper variables
         var gameComputerChoice = null;
@@ -205,31 +225,54 @@
         var gamePlayerAction = null;
 
         function StartGame() {
+            document.getElementById("newhighscore").style.visibility = "hidden";
             gameScoreElement = document.getElementById("score");
             gameScoreElement.innerText = defaultGameScore;
             gamePlayerScore = defaultGameScore;
 
-            //var debugChoice = document.getElementById("debugchoice");
-            //var debugTimer = document.getElementById("debugtimer");
-            
-            //var timerValid = true;
-            //while (gameScore > 0) {
-            //    setInterval(function () {
-            //        var nextChoice = gameChoices[Math.floor(Math.random() * gameChoices.length)];
-            //        var nextCondition = gameConditions[Math.floor(Math.random() * gameConditions.length)];
-            //        debugChoice.innerText = "Choice: " + nextChoice.choice + " Condition: " + nextCondition;
-            //    }, 1000);
-            //}
+            gameStatus.innerText = "";
 
             NextPick();
+        }
+
+        function EndGame() {
+            //Stop the timer
+            StopTimer();
+            CheckEndScore();
+
+            //Disable the game buttons
+            document.getElementById("buttonrock").disabled = true;
+            document.getElementById("buttonpaper").disabled = true;
+            document.getElementById("buttonscissors").disabled = true;
+
+            //Update game information
+            //  Object name
+            document.getElementById("computerpickobject").textContent = "";
+
+            //  Object image
+            document.getElementById("computerpickimg").src = "/images/Assignment1/smileyface.jpg";
+
+            //  Condition name
+            document.getElementById("computerpickcondition").textContent = "";
+
+            //  Status
+            gameStatus.innerText = "The game has ended. Thanks for playing!";
         }
 
         function NextPick() {
             //Generate next picks
             gameComputerChoice = gameChoices[Math.floor(Math.random() * gameChoices.length)];
+            var previousCondition = gameComputerCondition;
             gameComputerCondition = gameConditions[Math.floor(Math.random() * gameConditions.length)];
 
+            //Prevents
+            while (gameComputerCondition == previousCondition) {
+                gameComputerCondition = gameConditions[Math.floor(Math.random() * gameConditions.length)];
+            }
+
             //Update game information
+            //  Some items are set to variables for debug output.
+
             //  Object name
             var objectText = document.getElementById("computerpickobject").textContent = gameComputerChoice.choice;
 
@@ -239,12 +282,23 @@
             //  Condition name
             var conditionText = document.getElementById("computerpickcondition").textContent = gameComputerCondition;
 
+            //Reset Timer
+            //  Reset is done here, as NextPick will be called after every pick, success or failure.
+            //  StartTimer essentially resets the timer values for the background loop.
+            StartTimer();
+
             //Debug
             document.getElementById("debugchoice").innerText = "Computer vars: Choice: " + gameComputerChoice.choice + " Condition: " + gameComputerCondition;
         }
 
         function StartTimer() {
+            timerRun = true;
+            currentGameTimer = defaultGameTimer;
+        }
 
+        function StopTimer() {
+            timerRun = false;
+            currentGameTimer = -1
         }
 
         function MakeChoice(userChoice) {
@@ -292,6 +346,7 @@
             }
             
             //Reset the timer
+            StartTimer();
 
             //Get next game item
             NextPick();
@@ -301,6 +356,9 @@
             //Add points to score.
             UpdateScore(5);
 
+            //Update status
+            gameStatus.innerText = "Success! You won 5 points!";
+
             //Debug
             document.getElementById("debugresult").innerText = "Result: Success"
         }
@@ -309,14 +367,60 @@
             //Remove points from score.
             UpdateScore(-10);
 
+            //Update status
+            gameStatus.innerText = "Incorrect. You LOST 10 points!"
+
             //Debug
-            document.getElementById("debugresult").innerText = "Result: Failure"
+            //document.getElementById("debugresult").innerText = "Result: Failure"
         }
 
         function UpdateScore(amount) {
             gamePlayerScore += amount;
             gameScoreElement.innerText = gamePlayerScore;
+
+            if (gamePlayerScore <= 0) {
+                console.log("Player ran out of points.");
+                EndGame();
+            }
+
+            if (gamePlayerScore > highScore) {
+                gameStatus.innerText = "New high score!! Your score: " + gamePlayerScore + ", previous high score: " + highScore;
+                highScore = gamePlayerScore;
+                document.getElementById("newhighscore").style.visibility = "visible";
+            } else {
+                //This allows the "new high score!" message's visibility to update.'
+                document.getElementById("newhighscore").style.visibility = "hidden";
+            }
         }
+
+        function CheckEndScore() {
+            if (gamePlayerScore > highScore || gamePlayerScore == highScore) {
+                highScore = gamePlayerScore;
+                document.getElementById("highscorepoints").innerText = highScore;
+            }
+        }
+
+        var timerInterval = setInterval(function () {
+            //-1 is the "not counting" value. Very much hardcoded nastiness.
+            if (currentGameTimer == -1) {
+                gameTimer.innerText = 0;
+            } else {
+                //Debug log. Won't print if timerRun is false to prevent spam.
+                //Also, really bad use of an else.
+                console.log("Timer value: " + currentGameTimer + " -- timerRun value: " + timerRun);
+            }
+
+            if (timerRun == true) {
+                currentGameTimer -= 1;
+                gameTimer.innerText = currentGameTimer;
+
+                if (currentGameTimer <= 0) {
+                    console.log("Timer has hit zero.");
+                    //alert("You have run out of time!");
+                    EndGame();
+                }
+            } 
+        }, 1000);
     </script>
 
 </body>
