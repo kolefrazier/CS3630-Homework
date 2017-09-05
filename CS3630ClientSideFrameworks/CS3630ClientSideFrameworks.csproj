@@ -23,4 +23,9 @@
     <None Include="wwwroot\assignments\BaseHtmlPage.html" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\" />
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
