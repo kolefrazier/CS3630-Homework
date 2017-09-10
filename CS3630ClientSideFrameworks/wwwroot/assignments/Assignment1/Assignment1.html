@@ -80,70 +80,79 @@
         <!--Actual game content-->
         <div class="row">
             <div class="panel panel-default">
-                <div class="panel-body text-center">
-                    <div class="row">
-                        <div id="gamecontainer" class="col-md-12" style="visibility:hidden;">
-
-                            <!--Score-->
-                            <div class="col-md-3">
-                                <dl>
-                                    <dt class="gamevaluetitle">Score: </dt>
-                                    <dd id="score" class="gamevaluetext">30</dd>
-                                </dl>
-                                <div id="newhighscore" style="visibility: hidden;"><div class="label label-warning">New high score!</div></div>
+                <div class="panel-body text-center" id="gamebackground" style="background-color: #e8e8e8;">
+                    <!--Timer and Score Column-->
+                    <div class="col-md-2">
+                        <div class="row">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">Time Remaining</div>
+                                <div class="panel-body">
+                                    <span id="timer">0</span> seconds
+                                </div>
                             </div>
+                        </div>
 
-                            <!--Image-->
-                            <div class="col-md-6">
-                                <img id="computerpickimg" src="#" class="img-thumbnail gameimage" />
-                            </div>
-
-                            <!--Timer-->
-                            <div class="col-md-3">
-                                <dl>
-                                    <dt class="gamevaluetitle">Timer</dt>
-                                    <dd class="gamevaluetext"><span id="timer"></span> seconds</dd>
-                                </dl>
+                        <div class="row">
+                            <div class="panel panel-success">
+                                <div class="panel-heading">Current Score</div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <span id="score" class="gamevaluetext">0</span> points
+                                    </div>
+                                    <div class="row">
+                                        <div class="label label-warning" id="newhighscore" style="visibility: hidden;">New high score!</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!--Game conditions-->
-                    <div class="row" id="conditionsrow">
-                        <div class="col-md-6 col-md-push-3">
-                            <div class="col-md-6">
-                                <dl>
-                                    <dt>Object:</dt>
-                                    <dd id="computerpickobject"></dd>
-                                </dl>
-                            </div>
-                            <div class="col-md-6">
-                                <dl>
-                                    <dt>Condition to Match: </dt>
-                                    <dd id="computerpickcondition"></dd>
-                                </dl>
+                    <!--Game Image and Game Choices/Information Column-->
+                    <div class="col-md-10">
+                        <div class="panel panel-default">
+                            <div class="panel-body" id="gamecontainer" style="visibility:hidden;">
+                                <!--Image-->
+                                <div class="row">
+                                    <img id="computerpickimg" src="#" class="img-thumbnail gameimage" />
+                                </div>
+
+                                <!--Game Information-->
+                                <hr />
+                                <div class="row">
+                                    <div class="col-md-6 col-md-push-2">
+                                        <dl>
+                                            <dt>Object:</dt>
+                                            <dd id="computerpickobject"></dd>
+                                        </dl>
+                                    </div>
+                                    <div class="col-md-6 col-md-pull-2">
+                                        <dl>
+                                            <dt>Condition to Match: </dt>
+                                            <dd id="computerpickcondition"></dd>
+                                        </dl>
+                                    </div>
+                                </div>
+
+                                <!--Game Status/Player feedback-->
+                                <div class="row">
+                                    <div class="panel-body"><span id="gamestatus"></span></div>
+                                </div>
+
+                                <!--Game Choices-->
+                                <div class="row">
+                                    <button id="buttonrock" class="btn btn-lg btn-primary gamebutton" onclick="MakeChoice('Rock')" disabled>Rock</button>
+                                    <button id="buttonpaper" class="btn btn-lg btn-primary" onclick="MakeChoice('Paper')" disabled>Paper</button>
+                                    <button id="buttonscissors" class="btn btn-lg btn-primary" onclick="MakeChoice('Scissors')" disabled>Scissors</button>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-
-                    <!--Game status/Player feedback-->
-                    <div class="row">
-                        <span id="gamestatus"></span>
-                    </div>
-
-                    <!--Player options-->
-                    <div class="row">
-                        <hr />
-                        <button id="buttonrock" class="btn btn-lg btn-primary gamebutton" onclick="MakeChoice('Rock')" disabled>Rock</button>
-                        <button id="buttonpaper" class="btn btn-lg btn-primary" onclick="MakeChoice('Paper')" disabled>Paper</button>
-                        <button id="buttonscissors" class="btn btn-lg btn-primary" onclick="MakeChoice('Scissors')" disabled>Scissors</button>
-                    </div>
-                </div>
             </div>
         </div>
 
         <!--Debug Value Printint-->
-        <div class="row" style="visibility: hidden;">
+        <div class="row" style="display: none;">
             <h5><u>DEBUG VALUES</u></h5>
             <p id="debugchoice"></p>
             <p id="debuguserchoice"></p>
