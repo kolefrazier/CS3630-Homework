@@ -55,34 +55,22 @@
             </div>
         </div>
 
-        <div class="row">
-            <!--Start game button-->
-            <div class="col-md-4 col-md-push-1 text-center">
-                <div class="panel panel-success">
-                    <div class="panel-heading">Game</div>
-                    <div class="panel-body">
-                        <button id="startbutton" class="btn btn-success">Start New Game</button>
-                    </div>
-                </div>
-            </div>
-
-            <!--Highscore Container-->
-            <div class="col-md-4 col-md-push-3 text-center">
-                <div class="panel panel-info">
-                    <div class="panel-heading">Your Highcore</div>
-                    <div class="panel-body text-center">
-                        <div class="highscoretext"><span id="highscorepoints">30</span> points</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!--Actual game content-->
         <div class="row">
             <div class="panel panel-default">
                 <div class="panel-body text-center" id="gamebackground" style="background-color: #e8e8e8;">
                     <!--Timer and Score Column-->
                     <div class="col-md-2">
+                        <!--Start Button-->
+                        <div class="row">
+                            <div class="panel">
+                                <div class="panel-body">
+                                    <button id="startbutton" class="btn btn-success">Start New Game</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Timer-->
                         <div class="row">
                             <div class="panel panel-info">
                                 <div class="panel-heading">Time Remaining</div>
@@ -92,6 +80,7 @@
                             </div>
                         </div>
 
+                        <!--Current Game's Score-->
                         <div class="row">
                             <div class="panel panel-success">
                                 <div class="panel-heading">Current Score</div>
@@ -102,6 +91,16 @@
                                     <div class="row">
                                         <div class="label label-warning" id="newhighscore" style="visibility: hidden;">New high score!</div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Highscore-->
+                        <div class="row">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">Overall Highscore</div>
+                                <div class="panel-body">
+                                    <div class="highscoretext"><span id="highscorepoints">30</span> points</div>
                                 </div>
                             </div>
                         </div>
