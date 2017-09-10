@@ -16,8 +16,8 @@
 }
 
 .gameimage {
-    width: 300px;
-    height: 300px;
+    width: 250px;
+    height: 250px;
 }
 
 .newhighscore {
@@ -31,4 +31,12 @@
 
 .highscoretext {
     font-weight: bold;
+}
+
+.gamevaluetitle {
+    font-size: large;
+}
+
+.gamevaluetext {
+    font-size: larger;
 }
