@@ -66,6 +66,20 @@ gameStartButton.addEventListener('click', function () {
     StartTimer();
 }, false);
 
+var gameButtonRock = document.getElementById("buttonrock").addEventListener('click', function () {
+    MakeChoice('Rock');
+}, false);
+
+var gameButtonPaper = document.getElementById("buttonpaper").addEventListener('click', function () {
+    MakeChoice('Paper');
+}, false);
+
+var gameButtonScissors = document.getElementById("buttonscissors").addEventListener('click', function () {
+    MakeChoice('Scissors');
+}, false);
+
+
+
 //Game actions
 var gameConditions = ['Win', 'Lose', 'Tie'];
 
