@@ -3,9 +3,54 @@ var gameContainer = document.getElementById("gamecontainer");
 var gameButtons = document.getElementsByClassName("gamebutton");
 var gameStatus = document.getElementById("gamestatus");
 var gameTimer = document.getElementById("timer");
-var gameStartButton = document.getElementById("startbutton").onclick = function () {
-    //Hide the Start Game button
-    //this.style.visibility = "hidden";
+
+//Other page elements setup
+var instructionsBody = document.getElementById("gameinstructions");
+var instructionsToggleButton = document.getElementById("gameinstructionstoggle");
+var instructionsToggle = true; //True = showing instructions, False = not showing instructions
+var gameStartButton = document.getElementById("startbutton");
+
+//Toggle the instructions visibility state.
+function ToggleInstructions() {
+    //Based on boolean variable instructionsToggle.
+    //  True = showing instructions
+    //  False = not showing instructions
+
+    if (instructionsToggle == true) {
+        instructionsToggle = false;
+        //instructionsBody.style.display = 'none';
+        document.getElementById("gameinstructions").style.display = "none";
+
+    } else {
+        instructionsToggle = true;
+        //instructionsBody.style.display = 'inline';
+        document.getElementById("gameinstructions").style.display = "inline";
+    }
+}
+
+//Manually set the instruction visibility state
+function SetInstructionState(state) {
+    //Based on boolean variable instructionsToggle.
+    //  True = showing instructions
+    //  False = not showing instructions
+
+    if (state == true) {
+        instructionsToggle = true;
+        document.getElementById("gameinstructions").style.display = "inline";
+    } else {
+        instructionsToggle = false;
+        document.getElementById("gameinstructions").style.display = "none";
+    }
+}
+
+instructionsToggleButton.addEventListener('click', function () {
+    ToggleInstructions();
+}, false);
+
+//var gameStartButton = document.getElementById("startbutton").onclick = function () {
+gameStartButton.addEventListener('click', function () {
+    //Hide game instructions
+    SetInstructionState(false);
 
     //Enable the game buttons
     document.getElementById("buttonrock").disabled = false;
@@ -19,7 +64,7 @@ var gameStartButton = document.getElementById("startbutton").onclick = function 
     gameContainer.scrollIntoView();
     StartGame();
     StartTimer();
-}
+}, false);
 
 //Game actions
 var gameConditions = ['Win', 'Lose', 'Tie'];

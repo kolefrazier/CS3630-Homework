@@ -7,9 +7,6 @@
 
     <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/Assignment1.css"/>
-
-    <!--Assignment/RPS-Game JS-->
-    <script src="js/RPS.js"></script>
 </head>
 <body>
     <div class="container body-content">
@@ -38,11 +35,10 @@
         <div id="#HowToPlay" class="row text-center">
             <div class="panel panel-primary">
                 <div class="panel-heading">How to Play</div>
-                <div class="panel-body">
-                    <div class="col-md-6">
-                        <p>An object will be randomly picked - <b>Rock, Paper or Scissors</b><br />You will be given a random condition to meet - <b>Win, Lose, Tie</b></p>
-                        <p>Your goal is to select the object that matches the condition for the random object.</p>
-                        <p>Pick correctly, earn some points. Pick incorrectly or fail to pick before the timer runs out, lose double points.</p>
+                <div class="panel-body" id="gameinstructions">
+                    <div class="col-md-12">
+                        <p>Pick Rock, Paper or Scissors to match the object and its condition.</p>
+                        <p>Start with 20 points. You lose if you run out of time or lose all your points.</p>
                     </div>
                     <div class="col-md-12 text-center">
                         <hr />
@@ -51,7 +47,11 @@
                         <p>Given Object is Rock, given Condition is Lose. You need to pick the item that makes you lose against Rock, which is scissors!</p>
                     </div>
                 </div>
-                <div class="panel-footer">Start with 20 points. You lose if you run out of time or lose all your points.</div>
+                <div class="panel-footer">
+                    <div class="text-center">
+                        <button id="gameinstructionstoggle" class="btn btn-sm btn-primary">Toggle Game Instructions</button>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -164,6 +164,10 @@
             <p class="text-muted text-center">Kole Frazier | CS3630 - Client Side Frameworks, Fall 2017</p>
         </footer>
     </div>
+
+    <!--Assignment/RPS-Game JS-->
+    <!--This is placed down here, as I have had issues with document.onload (etc) when trying to use it in the past.. So, I'm loading it last.-->
+    <script src="js/RPS.js"></script>
 
 </body>
 </html>
